@@ -3,6 +3,8 @@
 namespace Tweettee\Includes;
 use Tweettee\Includes\Tweettee_Loader;
 use Tweettee\Includes\Tweettee_Locale;
+use Tweettee\PublicPart\Tweettee_Public;
+use Tweettee\AdminPart\Tweettee_Admin;
 
 class Tweettee{
     protected $version;
@@ -31,16 +33,22 @@ class Tweettee{
         $plugin_locale = new Tweettee_Locale;
     }
     
-    private function public_hooks(){
-        $plugin_admin = new Tweette_Admin($this->get_plugin_name(), $this->get_version());
+    private function admin_hooks(){
+        $plugin_admin = new Tweettee_Admin($this->get_plugin_name(), $this->get_version());
+        
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
     }
     
-    private function admin_hooks(){
+    private function public_hooks(){
         $plugin_public = new Tweettee_Public($this->get_plugin_name(), $this->get_version());
+        
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
     }
     
     public function plugin_start(){
-        //
+        $this->loader->load_start();
     }
     
     private function get_plugin_name(){

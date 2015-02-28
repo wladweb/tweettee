@@ -1,8 +1,23 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Tweettee\PublicPart;
+
+class Tweettee_Public{
+    private $plugin_name;
+    private $version;
+    
+    public function __construct($plugin_name, $version){
+        $this->plugin_name = $plugin_name;
+        $this->version = $version;
+    }
+    
+    public function enqueue_scripts(){
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tweettee_public.js', array('jquery'), $this->version, false);
+    }
+    
+    public function enqueue_styles(){
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tweettee_public.css', array(), $this->version, 'all');
+    }
+    
+}
 
