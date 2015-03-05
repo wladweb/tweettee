@@ -19,6 +19,8 @@ if (! defined('WPINC')){
 	die;
 }
 
+require_once 'autoload.php';
+
 $activate_tweettee = function(){
     require_once plugin_dir_path(__FILE__) . 'includes/tweettee_activator.php';
     Inc\Tweettee_Activator::activate();

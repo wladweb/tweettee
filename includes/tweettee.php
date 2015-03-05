@@ -6,6 +6,8 @@ use Tweettee\Includes\Tweettee_Locale;
 use Tweettee\PublicPart\Tweettee_Public;
 use Tweettee\AdminPart\Tweettee_Admin;
 
+
+
 class Tweettee{
     protected $version;
     protected $plugin_name;
@@ -38,6 +40,8 @@ class Tweettee{
         
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+        
+        $this->loader->add_action('admin_menu', $plugin_admin, 'add_settings_page');
     }
     
     private function public_hooks(){
