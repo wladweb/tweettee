@@ -3,8 +3,8 @@
 namespace Tweettee\Includes;
 use Tweettee\Includes\Tweettee_Loader;
 use Tweettee\Includes\Tweettee_Locale;
-use Tweettee\PublicPart\Tweettee_Public;
-use Tweettee\AdminPart\Tweettee_Admin;
+use Tweettee\Public_Part\Tweettee_Public;
+use Tweettee\Admin_Part\Tweettee_Admin;
 
 
 
@@ -25,8 +25,8 @@ class Tweettee{
     
     private function load_depend(){
         require_once plugin_dir_path(dirname(__FILE__)) . 'includes/tweettee_loader.php';
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/tweettee_public.php';
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/tweettee_admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public_part/tweettee_public.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin_part/tweettee_admin.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'includes/tweettee_locale.php';
         $this->loader = new Tweettee_Loader;
     }
@@ -38,9 +38,6 @@ class Tweettee{
     private function admin_hooks(){
         $plugin_admin = new Tweettee_Admin($this->get_plugin_name(), $this->get_version());
         
-        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-        
         $this->loader->add_action('admin_menu', $plugin_admin, 'add_settings_page');
     }
     
@@ -49,6 +46,7 @@ class Tweettee{
         
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+        $this->loader->add_action('widgets_init', $plugin_public, 'tweettee_widget_register');
     }
     
     public function plugin_start(){

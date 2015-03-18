@@ -4,9 +4,9 @@
  *
  * @license MIT
  */
-namespace Abraham;
+namespace Tweettee\Includes\Oauth;
 
-use Abraham\Util\JsonDecoder;
+use Tweettee\Includes\Oauth\Util\JsonDecoder;
 
 /**
  * TwitterOAuth class for interacting with the Twitter API.

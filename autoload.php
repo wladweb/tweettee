@@ -9,10 +9,10 @@
 spl_autoload_register(function ($class) {
 
     // project-specific namespace prefix
-    $prefix = 'Abraham\\';
+    $prefix = 'Tweettee\\';
 
     // base directory for the namespace prefix
-    $base_dir = __DIR__ . '/includes/oauth/';
+    $base_dir = __DIR__ . '/';
 
     // does the class use the namespace prefix?
     $len = strlen($prefix);

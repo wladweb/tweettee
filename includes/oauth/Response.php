@@ -1,6 +1,6 @@
 <?php
 
-namespace Abraham;
+namespace Tweettee\Includes\Oauth;
 
 /**
  * The result of the most recent API request.

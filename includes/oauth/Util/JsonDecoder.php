@@ -1,6 +1,6 @@
 <?php
 
-namespace Abraham\Util;
+namespace Tweettee\Includes\Oauth\Util;
 
 /**
  * @author louis <louis@systemli.org>

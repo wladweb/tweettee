@@ -1,6 +1,6 @@
 <?php
 
-namespace Abraham;
+namespace Tweettee\Includes\Oauth;
 
 /**
  * @author Abraham Williams <abraham@abrah.am>

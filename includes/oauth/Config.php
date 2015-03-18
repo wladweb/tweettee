@@ -1,6 +1,6 @@
 <?php
 
-namespace Abraham;
+namespace Tweettee\Includes\Oauth;
 
 /**
  * Handle setting and storing config for TwitterOAuth.

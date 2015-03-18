@@ -3,7 +3,7 @@
  * The MIT License
  * Copyright (c) 2007 Andy Smith
  */
-namespace Abraham;
+namespace Tweettee\Includes\Oauth;
 
 /**
  * A class for implementing a Signature Method

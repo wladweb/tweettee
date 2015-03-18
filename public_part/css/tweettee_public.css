@@ -1,0 +1,20 @@
+.tweette-table{
+    width: 100%;
+    border-spacing: 2px;
+    border-collapse: separate;
+}
+
+.tweette-table td{
+    border: 1px solid #9966cc;
+    background-color: #94cde7;
+}
+
+.tweettee-bad-img{
+    display: block;
+    width: 85%;
+    margin: 0 auto;
+}
+#tweettee_plugin-2 p.tweettee-bad-message{
+    margin-bottom: .2em;
+    text-align: center;
+}
