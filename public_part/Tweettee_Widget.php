@@ -2,20 +2,34 @@
 
 namespace Tweettee\Public_Part;
 use Tweettee\Includes\Oauth\TwitterOAuth;
+use Tweettee\Includes\Core\Tweettee_Builder_Widget;
 
 class Tweettee_Widget extends \WP_Widget{
     
-    private $mode = 1;
+    private $mode = 2;
     private $result = null;
     private $option = null;
+    private $tweettee_builder_widget;
     
     public function __construct(){
         parent::__construct('tweettee_plugin', 'Tweettee', array('description' => 'Description here'));
         $this->option = get_option('tweettee');
+        
     }
     
-    public function widget($args, $instance){
-        $this->get_twitts();
+    public function widget($args, $instance){ //посмотреть extract args
+        
+        $this->tweettee_builder_widget = new Tweettee_Builder_Widget($args, $instance);
+        $this->tweettee_builder_widget->draw_tweettee();
+        
+        /***********************************************
+         * 
+        $tweetts = $this->get_twitts();
+        
+        //var_dump($this->result);
+        //exit;
+        
+        
         
         !empty($instance['title']) ? $title = $instance['title'] : $title = $args['widget_name'];
         
@@ -32,7 +46,7 @@ class Tweettee_Widget extends \WP_Widget{
         printf($before_widget, $args['widget_name'], $args['widget_name']);
         print $args['before_title'] . $title . $args['after_title'];
 
-        if(is_null($this->result)){
+        if(is_null($this->result) || !is_array($this->result)){
             require_once('tpl/bad_template.php');
         }else{
             $this->prepare_text();
@@ -40,11 +54,12 @@ class Tweettee_Widget extends \WP_Widget{
         }
         
         print $after_widget;
-        
-        /**********************************************/
+        ***************************************************************/
+        /***********************
         var_dump($args);
         print '<hr>';
         var_dump($instance);
+        ***********************/
     }
     
     public function update($new_instance, $old_instance){
@@ -74,7 +89,7 @@ class Tweettee_Widget extends \WP_Widget{
             case 1:
                 $request_string = 'statuses/user_timeline';break;
             case 2:
-                $request_string = '';break;
+                $request_string = 'search/tweets';break;
             default:
                 $request_string = '';
         }
@@ -86,12 +101,14 @@ class Tweettee_Widget extends \WP_Widget{
             $this->option['access_secret']
         );
 
-        $this->result = $connection->get($request_string);
-        
+        //$this->result = $connection->get($request_string, array('count' => 5, 'screen_name' => 'wlad_77', 'trim_user' => true));
+        $this->result = $connection->get($request_string, array('q' => 'f1', 'lang' => 'es'));
+        //var_dump($this->result);
+        //exit;    
     }
     
     private function prepare_text(){
-        foreach ($this->result as $twit){
+        foreach ($this->result->statuses as $twit){
             
             $hashtags = array();
             $hashtags_replace = array();

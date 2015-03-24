@@ -3,3 +3,116 @@ p.message{
     color:#f04040;
 }
 
+.account-wrapper{
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.account-body{
+    //height: 500px;
+    margin: 5px;
+    border-radius: 5px;
+    padding:10px;
+}
+
+.account-image{
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    border: 5px solid #fff;
+    border-radius: 10px;
+}
+
+.account-info{
+    width:80%;
+    margin: 10px auto;
+    background: #fff;
+    //height: 150px;
+    border-radius: 5px;
+}
+
+.account-info h4{
+    text-align: center;
+    margin: 5px auto;
+}
+
+.account-description{
+    text-align: center;
+    margin: 5px auto;
+}
+    
+fieldset{
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 20px 0; 
+}
+
+legend{
+    margin-left: 20px;
+}
+
+#settings-main-page-block{
+    height:100px;
+    background: #298cba;
+    margin: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+#search-result-for{
+    display: none;
+    //height:100px;
+    background: #09cafa;
+    margin: 10px;
+    border-radius: 5px;
+    display: none;
+    padding:10px;
+}
+
+#tweettee-another-timeline-error,
+#tweettee-free-word-error{
+    color: #f00;
+}
+
+.flag{
+    height: 20px;
+    width: 30px;
+    background-image: url(../images/language.png);
+    display: inline-block;
+}
+
+label[for="tweettee-language-all"]{
+    background-position: 30px 0;
+}
+label[for="tweettee-language-en"]{
+    background-position: 180px 0;
+}
+label[for="tweettee-language-ru"]{
+    background-position: 150px 0;
+}
+label[for="tweettee-language-de"]{
+    background-position: 210px 0;
+}
+label[for="tweettee-language-fr"]{
+    background-position: 120px 0;
+}
+label[for="tweettee-language-it"]{
+    background-position: 90px 0;
+}
+label[for="tweettee-language-es"]{
+    background-position: 60px 0;
+}
+
+#tweettee-language [type="radio"]{
+    line-height: 2em;
+}
+
+#tweettee-language ul{
+    margin: 5px 0 5px 20px;
+}
+
+#tweettee-language h5{
+    margin: 5px 0 0 0;
+}
