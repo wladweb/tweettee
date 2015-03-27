@@ -1,5 +1,5 @@
 <h4>Sorry</h4>
 <p class="tweettee-bad-message">
-    Something went wrong. Check plugin settings.
+    <?php print $this->error_message; ?>
 </p>
-<img class="tweettee-bad-img" src="<?php print plugin_dir_url(__FILE__); ?>kote.jpg" alt="Грусть">
+<img class="tweettee-bad-img" src="<?php print plugin_dir_url(__FILE__); ?>images/kote.jpg" alt="Грусть">

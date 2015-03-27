@@ -43,14 +43,13 @@
         </div>
 
         <h2>Settings</h2>
-        <pre>
         <?php
             $widget_content_1 = $widget_content_2 = $widget_content_3 = $widget_content_4 = '';
             $search_content_1 = $search_content_2 = $search_content_3 = $search_content_4 = '';
             $tweettee_language_1 = $tweettee_language_1 = $tweettee_language_1 = $tweettee_language_1 = $tweettee_language_1 = $tweettee_language_1 = $tweettee_language_1 = '';
-            $w_c = 'widget_content_'. $this->option['widget-content-type'];
-            $s_c = 'search_content_'. $this->option['search-content-type'];
-            $t_l = 'tweettee_language_'. $this->option['tweettee-language'];
+            $w_c = 'widget_content_'. $this->option['w_content_type'];
+            $s_c = 'search_content_'. $this->option['w_search_type'];
+            $t_l = 'tweettee_language_'. $this->option['w_language'];
             $$w_c = $$s_c = $$t_l = 'checked';
             if ($this->get_admin_page_url()){
                 $str = '"' . $this->get_admin_page_url() . '"';
@@ -59,7 +58,6 @@
             }
             print "<script>var tweettee_oauth_redir_url = " . $str . "</script>";
         ?>
-        </pre>
         <form method="post" action="<?php $SERVER['REQUEST_URI'] ?>" name="">
             
             <fieldset>
@@ -78,32 +76,35 @@
                 <legend>Виджет</legend>
                 
                 <div>
-                    <input type="radio" name="widget-content-type" id="tweettee-my-timeline" value="1" <?php echo $widget_content_1; ?>>
+                    <input type="radio" name="w_content_type" id="tweettee-my-twits" value="1" <?php echo $widget_content_1; ?>>
+                    <label for="tweettee-my-twits">Мои твиты</label>
+                    <br>
+                    <input type="radio" name="w_content_type" id="tweettee-my-timeline" value="2" <?php echo $widget_content_2; ?>>
                     <label for="tweettee-my-timeline">Моя лента</label>
                     <br>
-                    <input type="radio" name="widget-content-type" id="tweettee-about-my-twitter" value="2" <?php echo $widget_content_2; ?>>
+                    <input type="radio" name="w_content_type" id="tweettee-about-my-twitter" value="3" <?php echo $widget_content_3; ?>>
                     <label for="tweettee-about-my-twitter">Упоминания</label>
                     <br>
-                    <input type="radio" name="widget-content-type" id="tweettee-another-timeline" value="3" <?php echo $widget_content_3; ?>>
-                    <label for="tweettee-another-timeline">Лента другого твитттер аккаунта:</label>
-                    <input type="text" id="tweettee-another-timeline-name" name="another-timeline-name" size="20">
+                    <input type="radio" name="w_content_type" id="tweettee-another-timeline" value="4" <?php echo $widget_content_4; ?>>
+                    <label for="tweettee-another-timeline">Твиты другого твитттер аккаунта:</label>
+                    <input type="text" id="tweettee-another-timeline-name" name="w_another_timeline" size="20" value="<?php echo $this->option['w_another_timeline'] ?>">
                     <span id="tweettee-another-timeline-error"></span>
                     <br>
-                    <input type="radio" name="widget-content-type" id="tweettee-search-result" value="4" <?php echo $widget_content_4; ?>>
+                    <input type="radio" name="w_content_type" id="tweettee-search-result" value="5" <?php echo $widget_content_5; ?>>
                     <label for="tweettee-search-result">Результат поиска по: </label>
                         <div id="search-result-for">
-                            <input type="radio" name="search-content-type" id="tweettee-search-post-bookmark" value="1" <?php echo $search_content_1; ?>>
+                            <input type="radio" name="w_search_type" id="tweettee-search-post-bookmark" value="1" <?php echo $search_content_1; ?>>
                             <label for="tweettee-search-post-bookmark">меткам поста</label>
                             <br>
-                            <input type="radio" name="search-content-type" id="tweettee-search-category-name" value="2" <?php echo $search_content_2; ?>>
+                            <input type="radio" name="w_search_type" id="tweettee-search-category-name" value="2" <?php echo $search_content_2; ?>>
                             <label for="tweettee-search-category-name">имени категории поста</label>
                             <br>
-                            <input type="radio" name="search-content-type" id="tweettee-search-keywords" value="3" <?php echo $search_content_3; ?>>
+                            <input type="radio" name="w_search_type" id="tweettee-search-keywords" value="3" <?php echo $search_content_3; ?>>
                             <label for="tweettee-search-keywords">ключевым словам</label>
                             <br>
-                            <input type="radio" name="search-content-type" id="tweettee-search-free-word" value="4" <?php echo $search_content_4; ?>>
+                            <input type="radio" name="w_search_type" id="tweettee-search-free-word" value="4" <?php echo $search_content_4; ?>>
                             <label for="tweettee-search-free-word">произвольной фразе</label>
-                            <input type="text" id="tweettee-free-word-value" name="search-word-value" size="20">
+                            <input type="text" id="tweettee-free-word-value" name="w_search_word" size="20">
                             <span id="tweettee-free-word-error"></span>
                             <br>
                             
@@ -111,51 +112,55 @@
                                 <h5>Language</h5>
                                 <ul>
                                     <li>
-                                        <input type="radio" name="tweettee-language" id="tweettee-language-all" value="all" <?php echo $tweettee_language_all; ?>>
+                                        <input type="radio" name="w_language" id="tweettee-language-all" value="all" <?php echo $tweettee_language_all; ?>>
                                         <label for="tweettee-language-all" class="flag"></label>
                                     </li>
                                     <li>
-                                        <input type="radio" name="tweettee-language" id="tweettee-language-en" value="en" <?php echo $tweettee_language_en; ?>>
+                                        <input type="radio" name="w_language" id="tweettee-language-en" value="en" <?php echo $tweettee_language_en; ?>>
                                         <label for="tweettee-language-en" class="flag"></label>
                                     </li>
                                     <li>
-                                        <input type="radio" name="tweettee-language" id="tweettee-language-ru" value="ru" <?php echo $tweettee_language_ru; ?>>
+                                        <input type="radio" name="w_language" id="tweettee-language-ru" value="ru" <?php echo $tweettee_language_ru; ?>>
                                         <label for="tweettee-language-ru" class="flag"></label>
                                     </li>
                                     <li>
-                                        <input type="radio" name="tweettee-language" id="tweettee-language-de" value="de" <?php echo $tweettee_language_de; ?>>
+                                        <input type="radio" name="w_language" id="tweettee-language-de" value="de" <?php echo $tweettee_language_de; ?>>
                                         <label for="tweettee-language-de" class="flag"></label>
                                     </li>
                                     <li>
-                                        <input type="radio" name="tweettee-language" id="tweettee-language-fr" value="fr" <?php echo $tweettee_language_fr; ?>>
+                                        <input type="radio" name="w_language" id="tweettee-language-fr" value="fr" <?php echo $tweettee_language_fr; ?>>
                                         <label for="tweettee-language-fr" class="flag"></label>
                                     </li>
                                     <li>
-                                        <input type="radio" name="tweettee-language" id="tweettee-language-it" value="it" <?php echo $tweettee_language_it; ?>>
+                                        <input type="radio" name="w_language" id="tweettee-language-it" value="it" <?php echo $tweettee_language_it; ?>>
                                         <label for="tweettee-language-it" class="flag"></label>
                                     </li>
                                     <li>
-                                        <input type="radio" name="tweettee-language" id="tweettee-language-es" value="es" <?php echo $tweettee_language_es; ?>>
+                                        <input type="radio" name="w_language" id="tweettee-language-es" value="es" <?php echo $tweettee_language_es; ?>>
                                         <label for="tweettee-language-es" class="flag"></label>
                                     </li>
                                 </ul>
                             </div>
                             
                         </div>
-                        
-                        
-                        
                 </div>
                 <hr>
-                <label for="tweettee-twit-count">Количество твитов</label>
-                <input type="text" id="tweettee-twit-count" name="tweettee_count" size="3" value="<?php echo $this->option['tweettee_count']; ?>">
                 
+                
+                
+                <label for="tweettee-twit-count">Количество твитов</label>
+                <input type="text" id="tweettee-twit-count" name="w_count" size="3" value="<?php echo $this->option['w_count']; ?>">
                 <hr>
                 
-                <input type="checkbox" id="rel-nofollow" name="rel_nofollow" value="checked" <?php echo $this->option['rel_nofollow'] ?>>
+                <input type="checkbox" id="tweettee-only-text" name="w_only_text" value="checked" <?php echo $this->option['w_only_text'] ?>>
+                <label for="tweettee-only-text">Выводить только текст твитов</label>
+                <hr>
+                
+                <input type="checkbox" id="rel-nofollow" name="w_rel_nofollow" value="checked" <?php echo $this->option['w_rel_nofollow'] ?>>
                 <label for="rel-nofollow">Seo</label>
                 <hr>
-                <input type="checkbox" id="noindex" name="noindex" value="checked" <?php echo $this->option['noindex'] ?>>
+                
+                <input type="checkbox" id="noindex" name="w_noindex" value="checked" <?php echo $this->option['w_noindex'] ?>>
                 <label for="noindex">Noindex</label>
             </fieldset>
 

@@ -1,75 +1,69 @@
 <?php
 
 namespace Tweettee\Includes\Core;
-use Tweettee\Includes\Oauth\TwitterOAuth;
+
+
 class Tweettee_Builder_Widget extends Tweettee_Builder{
     
     private $args;
     private $instance;
-    private $twitteroauth = NULL;
-    private $data;
+    private $error_message = 'Something went wrong. Check plugin settings.';
     
     public function __construct($args, $instance){
         parent::__construct();
         $this->args = $args;
         $this->instance = $instance;
-        //$this->twitteroauth = new TwitterOAuth;
-        $this->data = $this->get_tweetts();
     }
     
     private function draw_header(){
-        echo '<h2>Header</h2>';
+        
+        !empty($this->instance['title']) ? $title = $this->instance['title'] : $title = $this->args['widget_name'];
+        
+        $noindex = '';
+        
+        if ($this->option['noindex']){
+            $noindex = '<!--noindex-->';
+        }
+        
+        $before_widget = $noindex . $this->args['before_widget'];
+        
+        printf($before_widget, $this->args['widget_name'], $this->args['widget_name']);
+        print $this->args['before_title'] . $title . $this->args['after_title'];
     }
     
     private function draw_footer(){
-        echo '<h2>Footer</h2>';
+        
+        $end_noindex ='';
+        
+        if ($this->option['noindex']){
+            $end_noindex = '<!--/noindex-->';
+        }
+        
+        print $this->args['after_widget'] . $end_noindex;
     }
     
     private function draw_body(){
-        echo '<h2>Body</h2>';
+        
         if(is_null($this->twitteroauth)){
             require_once 'tpl/bad_template.php';
+            return;
         }
-        //print_r($this->data);
+        
+        try{
+            $data = $this->get_tweetts($this->option['widget-content-type']);
+        }  catch (Tweettee_Exception $e){
+            $this->error_message = $e->getMessage();
+            require_once 'tpl/bad_template.php';
+            return;
+        }
+        
+        require_once 'tpl/good_template.php';
     }
     
     public function draw_tweettee() {
         $this->draw_header();
         $this->draw_body();
         $this->draw_footer();
-    }
-    
-    private function get_tweetts(){
-        
-        $query_string = '';
-        
-        switch($this->option['widget-content-type']){
-            case 1: 
-                $this->get_timeline();
-                break;
-            case 2: 
-                $query_string = '';
-                break;
-            case 3: 
-                $this->get_timeline($name);
-                break;
-            case 4: 
-                $this->data = $this->get_search_result($this->get_quest_value());
-                break;
-        }
-        
-        
-        
-        $data = array('twit1', 'twit2');
-        return $data;
-    }
-    
-    private function get_timeline($name = FALSE){
-        if(!name){
-            //
-        }else{
-            //
-        }
     }
     
     private function get_search_result($quest){
@@ -87,22 +81,6 @@ class Tweettee_Builder_Widget extends Tweettee_Builder{
             case 4: 
                 return $this->clear_str($this->option['tweettee-search-free-word']);
         }
-    }
-    
-    private function ask_twitter($request_string){
-        
-        $connection = new TwitterOAuth(
-            $this->option['consumer_key'], 
-            $this->option['consumer_secret'], 
-            $this->option['access_token'], 
-            $this->option['access_secret']
-        );
-        
-        $this->result = $connection->get($request_string, array('q' => 'f1', 'lang' => 'es'));
-    }
-    
-    private function clear_str($str){
-        return trim(strip_tags($str));
     }
 }
 

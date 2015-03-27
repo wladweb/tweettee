@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
     });
     
     //twitter-search-settings-block
-    jQuery('[name=widget-content-type]').on('change', function(){
+    jQuery('[name=w_content_type]').on('change', function(){
         if (jQuery('#tweettee-search-result').prop('checked')){
             jQuery('#search-result-for').slideDown(300);
         }else{
@@ -37,7 +37,7 @@ jQuery(document).ready(function(){
         jQuery('#tweettee-another-timeline-error').text('');
     });
     
-    jQuery('[name=search-content-type]').on('change', function(){
+    jQuery('[name=w_search_type]').on('change', function(){
         if(jQuery('#tweettee-search-free-word').prop('checked')){
             jQuery('#tweettee-free-word-value').focus();
         }

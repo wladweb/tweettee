@@ -20,7 +20,7 @@ class Tweettee_Public{
     }
     
     public function tweettee_widget_register(){
-        register_widget( __NAMESPACE__ . '\Tweettee_Widget');
+        register_widget('Tweettee\Includes\Core\Tweettee_Widget');
     }
 }
 

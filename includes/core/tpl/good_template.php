@@ -3,7 +3,7 @@
 <pre>
 <?php
     //print_r($data);
-    foreach($this->result->statuses as $twit){
+    foreach($data as $twit){
         print $twit->text . "<hr>\r\n\r\n";
     }
 ?>
