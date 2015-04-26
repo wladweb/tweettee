@@ -1,3 +1,8 @@
+#tweettee_main_content *{
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 .tweette-table{
     width: 100%;
     border-spacing: 2px;
@@ -18,4 +23,111 @@
     margin-bottom: .2em;
     text-align: center;
     color: #bc0b0b;
+}
+
+.user-request{
+    color: #222222;
+    font-style: italic;
+}
+
+/*********************************
+    MAIN_BLOCK
+*********************************/
+
+#tweettee_main_content{
+    width: 100%;
+}
+
+.tweettee_block{
+    font-family: Helvetica, sans-serif;
+    padding: 5px;
+    background: #f6f6f6;
+    margin: 1px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ddd;
+}
+
+.tweettee-block-header{
+    //
+}
+
+.tweettee-block-header img{
+    display: block;
+    width: 40px;
+    margin: 0 auto; 
+    border: 3px solid #fff;
+    border-radius: 3px;
+}
+
+#tweettee_main_content .tweettee-block-header p,
+#tweettee_main_content .tweettee-block-body p,
+#tweettee_main_content .tweettee-block-footer p{
+    margin: 0;
+}
+
+.tweettee-block-header p{
+    text-align: center;
+    font-size: 10px;
+}
+
+.tweettee-block-header p a{
+    font-weight: bold;
+}
+
+.tweettee-block-body{
+    font-size: 11px;
+    margin: 5px auto;
+    line-height: 1.2em;
+}
+
+.tweettee_block .tweettee-block-body a{
+    border-bottom: 0;
+    color: #07526c;
+}
+
+.tweettee_block .tweettee-block-body a:hover{
+    color: #006dcc;
+}
+
+.tweettee-block-footer{
+    //
+}
+
+.tweettee-block-date{
+    text-align: center;
+    margin: 0;
+    font-size: 9px;
+    font-style: italic;
+}
+
+.tweettee-block-link{
+    text-align: right;
+    margin: 0;
+    font-size: 10px;
+}
+
+/*********************************
+    WIDGET
+*********************************/
+
+.w-tweettee-block{
+    margin: 0; 
+}
+
+.w-tweettee-block-body{
+    margin: 5px auto;
+}
+
+.w-tweettee-block-date{
+    text-align: right;
+    margin: 0;
+    font-size: 9px;
+    font-style: italic;
+}
+
+.w-tweettee-block-link{
+    text-align: right;
+    margin: 0;
+    font-size: 10px;
 }

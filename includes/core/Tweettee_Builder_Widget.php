@@ -16,12 +16,18 @@ class Tweettee_Builder_Widget extends Tweettee_Builder{
     }
     
     private function draw_header(){
+        /*
+        print '<pre>';
+        var_dump($this->args);
+        print '<hr>';
+        var_dump($this->instance);
+       */
         
         !empty($this->instance['title']) ? $title = $this->instance['title'] : $title = $this->args['widget_name'];
         
         $noindex = '';
         
-        if ($this->option['noindex']){
+        if ($this->option[$this->prefix.'noindex']){
             $noindex = '<!--noindex-->';
         }
         
@@ -35,7 +41,7 @@ class Tweettee_Builder_Widget extends Tweettee_Builder{
         
         $end_noindex ='';
         
-        if ($this->option['noindex']){
+        if ($this->option[$this->prefix.'noindex']){
             $end_noindex = '<!--/noindex-->';
         }
         
@@ -44,13 +50,14 @@ class Tweettee_Builder_Widget extends Tweettee_Builder{
     
     private function draw_body(){
         
+        
         if(is_null($this->twitteroauth)){
             require_once 'tpl/bad_template.php';
             return;
         }
         
         try{
-            $data = $this->get_tweetts($this->option['widget-content-type']);
+            $data = $this->get_tweetts();
         }  catch (Tweettee_Exception $e){
             $this->error_message = $e->getMessage();
             require_once 'tpl/bad_template.php';
@@ -66,21 +73,9 @@ class Tweettee_Builder_Widget extends Tweettee_Builder{
         $this->draw_footer();
     }
     
-    private function get_search_result($quest){
-        //
+    protected static function who(){
+        return 'w_';
     }
     
-    private function get_quest_value(){
-        switch($this->option['search-content-type']){
-            case 1: 
-                return ;
-            case 2: 
-                return ;
-            case 3: 
-                return ;
-            case 4: 
-                return $this->clear_str($this->option['tweettee-search-free-word']);
-        }
-    }
 }
 

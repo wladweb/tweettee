@@ -54,65 +54,145 @@ legend{
 }
 
 #settings-main-page-block{
-    height:100px;
-    background: #298cba;
+    //background: #298cba;
     margin: 10px;
     border-radius: 5px;
     display: none;
 }
 
-#search-result-for{
+#search-result-for,
+#m-search-result-for{
     display: none;
     //height:100px;
-    background: #09cafa;
+    
     margin: 10px;
     border-radius: 5px;
     display: none;
     padding:10px;
 }
 
+#search-result-for{
+    background: #86cee9;
+}
+
+#m-search-result-for{
+    background: #afa;
+}
+
 #tweettee-another-timeline-error,
-#tweettee-free-word-error{
+#tweettee-free-word-error,
+#m-tweettee-another-timeline-error,
+#m-tweettee-free-word-error{
     color: #f00;
 }
 
-.flag{
-    height: 20px;
-    width: 30px;
-    background-image: url(../images/language.png);
-    display: inline-block;
+
+
+.checkbox {
+	vertical-align: top;
+	margin: 0 3px 0 0;
+	width: 17px;
+	height: 17px;
 }
 
-label[for="tweettee-language-all"]{
-    background-position: 30px 0;
-}
-label[for="tweettee-language-en"]{
-    background-position: 180px 0;
-}
-label[for="tweettee-language-ru"]{
-    background-position: 150px 0;
-}
-label[for="tweettee-language-de"]{
-    background-position: 210px 0;
-}
-label[for="tweettee-language-fr"]{
-    background-position: 120px 0;
-}
-label[for="tweettee-language-it"]{
-    background-position: 90px 0;
-}
-label[for="tweettee-language-es"]{
-    background-position: 60px 0;
+.checkbox + label {
+	cursor: pointer;
 }
 
-#tweettee-language [type="radio"]{
+
+
+
+.checkbox:not(checked) {
+	position: absolute;
+	opacity: 0;
+}
+.checkbox:not(checked) + label {
+	position: relative; 
+	padding: 0 0 0 60px; 
+}
+
+.checkbox:not(checked) + label:before {
+	content: '';
+	position: absolute;
+	top: -4px;
+	left: 0;
+	width: 50px;
+	height: 26px;
+	border-radius: 13px;
+	background: #CDD1DA;
+	box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+}
+
+.checkbox:not(checked) + label:after {
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: 2px;
+	width: 22px;
+	height: 22px;
+	border-radius: 10px;
+	background: #FFF;
+	box-shadow: 0 2px 5px rgba(0,0,0,.3);
+	transition: all .2s; 
+}
+
+.checkbox:checked + label:before {
+	background: #9FD468;
+}
+
+.checkbox:checked + label:after {
+	left: 26px;
+}
+
+.checkbox:focus + label:before {
+	box-shadow: 0 0 0 3px rgba(255,255,0,.5);
+}
+
+
+
+fieldset:first-child{
+    background: #cfc;
+}
+
+fieldset:nth-child(2){
+    background: #a3daee;
+}
+
+fieldset:first-child legend{
+    background: #afa;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    width: 150px;
+    text-align: center;
+}
+
+fieldset:nth-child(2) legend{
+    background: #86cee9;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    width: 150px;
+    text-align: center;
+}
+
+.result-type,
+.tweettee-language {
+    margin: 10px auto;
+}
+
+label{
     line-height: 2em;
 }
 
-#tweettee-language ul{
-    margin: 5px 0 5px 20px;
+fieldset:first-child  hr{
+    border:1px solid #afa;
 }
 
-#tweettee-language h5{
-    margin: 5px 0 0 0;
+fieldset:nth-child(2) hr{
+    border:1px solid #86cee9;
 }

@@ -33,6 +33,8 @@ class Tweettee{
     
     private function set_locale(){
         $plugin_locale = new Tweettee_Locale;
+        $plugin_locale->set_domain($this->get_plugin_name());
+        $this->loader->add_action('plugins_loaded', $plugin_locale, 'load_plugin_textdomain');
     }
     
     private function admin_hooks(){
@@ -47,6 +49,8 @@ class Tweettee{
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('widgets_init', $plugin_public, 'tweettee_widget_register');
+        $this->loader->add_action('loop_start', $plugin_public, 'tweettee_main_block');
+        $this->loader->add_action('loop_end', $plugin_public, 'tweettee_main_block_erase');
     }
     
     public function plugin_start(){

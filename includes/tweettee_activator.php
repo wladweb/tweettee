@@ -11,7 +11,7 @@ class Tweettee_Activator{
             'access_token' => NULL,
             'access_secret' => NULL,
             'account_info' => NULL,
-            'show-main-page-settings' => NULL,
+            'show_main_page_settings' => NULL,
             'w_content_type' => 1,
             'w_another_timeline' => NULL,
             'w_search_type' => 1,
@@ -20,7 +20,9 @@ class Tweettee_Activator{
             'w_rel_nofollow' => NULL,
             'w_noindex' => NULL,
             'w_only_text' => NULL,
+            'w_result_type' => 'mixed',
             'w_language' => 'all',
+            'm_after_which_post' => 1,
             'm_content_type' => 1,
             'm_another_timeline' => NULL,
             'm_search_type' => 1,
@@ -29,6 +31,7 @@ class Tweettee_Activator{
             'm_rel_nofollow' => NULL,
             'm_noindex' => NULL,
             'm_only_text' => NULL,
+            'm_result_type' => 'mixed',
             'm_language' => 'all'
         );
         
