@@ -1,0 +1,164 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tweettee v1.0\n"
+"POT-Creation-Date: 2015-04-28 10:06+0300\n"
+"PO-Revision-Date: 2015-04-28 10:07+0300\n"
+"Last-Translator: Vladimir Petrov\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.6\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../includes/core/Tweettee_Builder_Widget.php:16
+msgid "Something went wrong. Check plugin settings."
+msgstr "Что-то пошло не так. Проверьте настройки плагина."
+
+#: ../includes/core/Tweettee_Widget.php:10
+msgid "Displays a list of tweets in accordance with the settings"
+msgstr "Выводит список твитов в соответствии с настройками"
+
+#: ../includes/core/Tweettee_Widget.php:26
+msgid "Title"
+msgstr "Заголовок"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:9
+msgid "Create new Application on "
+msgstr "Создать новое приложение на "
+
+#: ../includes/core/tpl/tweettee_admin_template.php:10
+msgid "Input <b>Callback URL</b> any correct url. Example: "
+msgstr "Ввести в поле <b>Callback URL</b> любой корректный URL. Например: "
+
+#: ../includes/core/tpl/tweettee_admin_template.php:11
+msgid "Copy <b>Consumer Key</b> and <b>Consuner Secret</b> in form."
+msgstr "Скопировать <b>Consumer Key</b> и <b>Consumer Secret</b> в поля формы."
+
+#: ../includes/core/tpl/tweettee_admin_template.php:12
+msgid "Send form and follow the instructions."
+msgstr "Отправить форму и следовать дальнейшим инструкциям."
+
+#: ../includes/core/tpl/tweettee_admin_template.php:28
+msgid "Send"
+msgstr "Отправить"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:59
+msgid "Settings"
+msgstr "Настройки"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:92
+msgid "Home page block"
+msgstr "Блок на главной "
+
+#: ../includes/core/tpl/tweettee_admin_template.php:95
+msgid "Show tweettee unit on the home page. (Not for all themes)"
+msgstr "Вывести блок с твитами на главной странице. (Не для всех тем)"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:101
+msgid "After which post show unit with tweets"
+msgstr "После какого по счету поста выводить блок с твитами"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:105
+#: ../includes/core/tpl/tweettee_admin_template.php:182
+msgid "User timeline"
+msgstr "Мои твиты"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:109
+#: ../includes/core/tpl/tweettee_admin_template.php:186
+msgid "Home timeline"
+msgstr "Моя лента"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:113
+#: ../includes/core/tpl/tweettee_admin_template.php:190
+msgid "Mentions"
+msgstr "Упоминания"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:117
+#: ../includes/core/tpl/tweettee_admin_template.php:194
+msgid "Home timeline another account"
+msgstr "Твиты другого твиттер аккаунта"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:123
+#: ../includes/core/tpl/tweettee_admin_template.php:200
+msgid "Search by :"
+msgstr "Поиск по :"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:126
+#: ../includes/core/tpl/tweettee_admin_template.php:209
+msgid "free word"
+msgstr "произвольному слову"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:131
+#: ../includes/core/tpl/tweettee_admin_template.php:214
+msgid "Search result"
+msgstr "Результаты поиска"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:134
+#: ../includes/core/tpl/tweettee_admin_template.php:217
+msgid "Popular"
+msgstr "Популярные"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:135
+#: ../includes/core/tpl/tweettee_admin_template.php:218
+msgid "Recent"
+msgstr "Последние"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:136
+#: ../includes/core/tpl/tweettee_admin_template.php:219
+msgid "Mixed"
+msgstr "Смешанные"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:142
+#: ../includes/core/tpl/tweettee_admin_template.php:225
+msgid "Language"
+msgstr "Язык"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:160
+#: ../includes/core/tpl/tweettee_admin_template.php:243
+msgid "Number of tweets"
+msgstr "Количество твитов"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:165
+#: ../includes/core/tpl/tweettee_admin_template.php:248
+msgid "Show only text"
+msgstr "Показывать только текст твитов"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:169
+#: ../includes/core/tpl/tweettee_admin_template.php:252
+msgid "All tweettee links with \"<b>rel=nofollow</b>\""
+msgstr "Добавить к ссылкам аттрибут \"<b>rel=nofollow</b>\""
+
+#: ../includes/core/tpl/tweettee_admin_template.php:173
+#: ../includes/core/tpl/tweettee_admin_template.php:256
+msgid "Wrap tweettee unit in \"<b>&lt;!--noindex--&gt;</b>\" (For SE Yandex)"
+msgstr ""
+"Обернуть блок с твитами в \"<b>&lt;!--noindex--&gt;</b>\" (Для ПС Яндекс)"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:178
+msgid "Widget"
+msgstr "Виджет"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:203
+msgid "post tags"
+msgstr "меткам поста"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:206
+msgid "category name"
+msgstr "названию категории"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:260
+msgid "Save settings"
+msgstr "Сохранить настройки"
+
+#~ msgid "Show tweettee unit on the home page"
+#~ msgstr "Вывести блок с твитами на главной странице"
+
+#~ msgid "Input <b>Callback URL</b> any correct value. Example: "
+#~ msgstr "Ввести в поле <b>Callback URL</b> любой корректный Url. Напрмер: "

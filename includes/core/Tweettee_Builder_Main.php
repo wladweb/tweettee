@@ -13,6 +13,7 @@ class Tweettee_Builder_Main extends Tweettee_Builder{
             throw new Tweettee_Exception('Не получен объект WP_Query');
         }
         $this->wp_q = $wp_q;
+//var_dump($this->wp_q); exit;        
     }
     
     public function have_main_block(){
@@ -43,13 +44,21 @@ class Tweettee_Builder_Main extends Tweettee_Builder{
         $tw_post->comment_status = 'hold';
         $tw_post->guid = '';
         $tw_post->post_content = $this->get_tweettee_content();
+        $tw_post->post_excerpt = $this->get_tweettee_content();
         
         return $tw_post;
     }
     
     private function get_tweettee_content(){
         
-        $tweettee_content = "<div id='tweettee_main_content'>";
+        $noindex_start = $noindex_end = '';
+        
+        if (!is_null($this->option['m_noindex'])){
+            $noindex_start = '<!--noindex-->';
+            $noindex_end = '<!--/noindex-->';
+        }
+        
+        $tweettee_content = $noindex_start . "<div id='tweettee_main_content'>";
         
         try{
             $data = $this->get_tweetts();
@@ -65,11 +74,11 @@ class Tweettee_Builder_Main extends Tweettee_Builder{
             
             if (is_null($this->option['m_only_text'])){
                 $tweettee_content .= sprintf(
-                          '<div class="tweettee-block-header"><img src="%s"><p>%s</p></div>'
+                          '<div class="tweettee-block-header"><img src="%s"><span>%s</span></div>'
                         . '<div class="tweettee-block-body">%s</div>'
                         . '<div class="tweettee-block-footer">'
-                            . '<p class="tweettee-block-date">%s</p>'
-                            . '<p class="tweettee-block-link">%s</p>'
+                            . '<span class="tweettee-block-date">%s</span>'
+                            . '<span class="tweettee-block-link">%s</span>'
                         . '</div>',
                     $v->user->profile_image_url,
                     $this->build_link('https://twitter.com/' . $v->user->screen_name, '@' . $v->user->screen_name),
@@ -87,7 +96,7 @@ class Tweettee_Builder_Main extends Tweettee_Builder{
             $tweettee_content .= "</div>";
         }
         
-        $tweettee_content .= "</div>";
+        $tweettee_content .= "</div>" . $noindex_end;
         
         return $tweettee_content;
     }

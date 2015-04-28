@@ -4,6 +4,7 @@ namespace Tweettee\Includes\Core;
 
 use Tweettee\Includes\Oauth\TwitterOAuth;
 use Tweettee\Includes\Oauth\TwitterOAuthException;
+use Exception;
 
 class Tweettee_Settings{
     
@@ -43,6 +44,7 @@ class Tweettee_Settings{
                 $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => $this->callback));
             }catch(TwitterOAuthException $e){
                 throw new Exception($e->getMessage());
+                //print $e->getMessage(); exit;
             }
             
             $value = array(
@@ -105,7 +107,7 @@ class Tweettee_Settings{
     
     private function set_language(){
         $languages = array(
-            'all' => 'Любой',
+            'all' => 'All',
             'ab' => 'Abkhazian',
             'ae' => 'Avestan',
             'af' => 'Afrikaans',

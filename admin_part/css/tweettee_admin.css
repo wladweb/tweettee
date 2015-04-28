@@ -1,4 +1,9 @@
 
+.tweettee-admin-block *{
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 p.message{
     color:#f04040;
 }
@@ -25,7 +30,7 @@ p.message{
 }
 
 .account-info{
-    width:80%;
+    width:60%;
     margin: 10px auto;
     background: #fff;
     //height: 150px;
@@ -195,4 +200,24 @@ fieldset:first-child  hr{
 
 fieldset:nth-child(2) hr{
     border:1px solid #86cee9;
+}
+
+.instructions,
+.first-form{
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    width:70%;
+    margin: 0 0 20px 50px;
+}
+
+.instructions{
+    background: #fffbcc;
+    padding: 5px;
+    box-shadow: 0 0 5px #EFE2A4;
+}
+
+.first-form{
+    background: #d2e0f9;
+    padding: 15px;
+    box-shadow: 0 0 5px #a5c1f3;
 }

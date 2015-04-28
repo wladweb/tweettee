@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       Tweettee
  * Plugin URI:        
- * Description:       This plugin can create widget with twits from timeline your twitter account or search result with different keywords
+ * Description:       Plugin show user timeline, home timeline, mentions, home timeline another twitter users, search result by post tags, category name, free word. Tweets can be show in widget and also between posts in main loop on home page.
  * Version:           1.0.0
  * Author:            Vladimir Petrov
  * License:           GPL-2.0+

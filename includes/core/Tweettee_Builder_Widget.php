@@ -7,21 +7,16 @@ class Tweettee_Builder_Widget extends Tweettee_Builder{
     
     private $args;
     private $instance;
-    private $error_message = 'Something went wrong. Check plugin settings.';
+    private $error_message;
     
     public function __construct($args, $instance){
         parent::__construct();
         $this->args = $args;
         $this->instance = $instance;
+        $this->error_message = __('Something went wrong. Check plugin settings.', 'tweettee');
     }
     
     private function draw_header(){
-        /*
-        print '<pre>';
-        var_dump($this->args);
-        print '<hr>';
-        var_dump($this->instance);
-       */
         
         !empty($this->instance['title']) ? $title = $this->instance['title'] : $title = $this->args['widget_name'];
         
