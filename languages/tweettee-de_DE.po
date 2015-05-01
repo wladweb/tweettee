@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tweettee v1.0\n"
-"POT-Creation-Date: 2015-04-27 11:17+0300\n"
-"PO-Revision-Date: 2015-04-27 11:17+0300\n"
+"POT-Creation-Date: 2015-05-01 21:23+0300\n"
+"PO-Revision-Date: 2015-05-01 21:27+0300\n"
 "Last-Translator: Vladimir Petrov\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../includes/core/Tweettee_Builder_Widget.php:16
 msgid "Something went wrong. Check plugin settings."
-msgstr ""
+msgstr "Da lief was falsch. Überprüfen Plugin-Einstellungen."
 
 #: ../includes/core/Tweettee_Widget.php:10
 msgid "Displays a list of tweets in accordance with the settings"
@@ -28,115 +28,134 @@ msgstr "Zeigt eine Liste von Tweets in Übereinstimmung mit den Einstellungen"
 msgid "Title"
 msgstr "Titel"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:17
+#: ../includes/core/tpl/tweettee_admin_template.php:9
+msgid "Create new Application on "
+msgstr "Erstelle eine neue Anwendung auf"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:10
+msgid "Input <b>Callback URL</b> any correct url. Example: "
+msgstr "Input <b>Callback URL</b> jede richtige URL. Beispiel:"
+
+#: ../includes/core/tpl/tweettee_admin_template.php:11
+msgid "Copy <b>Consumer Key</b> and <b>Consuner Secret</b> in form."
+msgstr "Copy <b>Consumer Key</b> und <b>Consuner Geheimnis</b> in Form."
+
+#: ../includes/core/tpl/tweettee_admin_template.php:12
+msgid "Send form and follow the instructions."
+msgstr "Datenblatt senden und folgen Sie den Anweisungen."
+
+#: ../includes/core/tpl/tweettee_admin_template.php:28
 msgid "Send"
 msgstr "Senden"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:42
+#: ../includes/core/tpl/tweettee_admin_template.php:59
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:75
+#: ../includes/core/tpl/tweettee_admin_template.php:92
 msgid "Home page block"
 msgstr "Startseite Block"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:78
-msgid "Show tweettee unit on the home page"
-msgstr "Zeigen tweettee Einheit auf der Homepage"
+#: ../includes/core/tpl/tweettee_admin_template.php:95
+msgid "Show tweettee unit on the home page. (Not for all themes)"
+msgstr "Zeigen tweettee Einheit auf der Startseite. (Nicht für alle Themen)"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:84
+#: ../includes/core/tpl/tweettee_admin_template.php:101
 msgid "After which post show unit with tweets"
 msgstr "Nach dem Post-Show-Einheit mit Tweets"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:88
-#: ../includes/core/tpl/tweettee_admin_template.php:165
+#: ../includes/core/tpl/tweettee_admin_template.php:105
+#: ../includes/core/tpl/tweettee_admin_template.php:182
 msgid "User timeline"
 msgstr "User-Timeline"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:92
-#: ../includes/core/tpl/tweettee_admin_template.php:169
+#: ../includes/core/tpl/tweettee_admin_template.php:109
+#: ../includes/core/tpl/tweettee_admin_template.php:186
 msgid "Home timeline"
 msgstr "Startseite Timeline"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:96
-#: ../includes/core/tpl/tweettee_admin_template.php:173
+#: ../includes/core/tpl/tweettee_admin_template.php:113
+#: ../includes/core/tpl/tweettee_admin_template.php:190
 msgid "Mentions"
 msgstr "Mentions"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:100
-#: ../includes/core/tpl/tweettee_admin_template.php:177
+#: ../includes/core/tpl/tweettee_admin_template.php:117
+#: ../includes/core/tpl/tweettee_admin_template.php:194
 msgid "Home timeline another account"
 msgstr "Startseite Timeline ein anderes Konto"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:106
-#: ../includes/core/tpl/tweettee_admin_template.php:183
+#: ../includes/core/tpl/tweettee_admin_template.php:123
+#: ../includes/core/tpl/tweettee_admin_template.php:200
 msgid "Search by :"
 msgstr "Suchen nach:"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:109
-#: ../includes/core/tpl/tweettee_admin_template.php:192
+#: ../includes/core/tpl/tweettee_admin_template.php:126
+#: ../includes/core/tpl/tweettee_admin_template.php:209
 msgid "free word"
 msgstr "freie Wort"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:114
-#: ../includes/core/tpl/tweettee_admin_template.php:197
+#: ../includes/core/tpl/tweettee_admin_template.php:131
+#: ../includes/core/tpl/tweettee_admin_template.php:214
 msgid "Search result"
 msgstr "Suchergebnis"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:117
-#: ../includes/core/tpl/tweettee_admin_template.php:200
+#: ../includes/core/tpl/tweettee_admin_template.php:134
+#: ../includes/core/tpl/tweettee_admin_template.php:217
 msgid "Popular"
 msgstr "beliebt"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:118
-#: ../includes/core/tpl/tweettee_admin_template.php:201
+#: ../includes/core/tpl/tweettee_admin_template.php:135
+#: ../includes/core/tpl/tweettee_admin_template.php:218
 msgid "Recent"
 msgstr "kürzlich"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:119
-#: ../includes/core/tpl/tweettee_admin_template.php:202
+#: ../includes/core/tpl/tweettee_admin_template.php:136
+#: ../includes/core/tpl/tweettee_admin_template.php:219
 msgid "Mixed"
 msgstr "gemischt"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:125
-#: ../includes/core/tpl/tweettee_admin_template.php:208
+#: ../includes/core/tpl/tweettee_admin_template.php:142
+#: ../includes/core/tpl/tweettee_admin_template.php:225
 msgid "Language"
 msgstr "Sprache"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:143
-#: ../includes/core/tpl/tweettee_admin_template.php:226
+#: ../includes/core/tpl/tweettee_admin_template.php:160
+#: ../includes/core/tpl/tweettee_admin_template.php:243
 msgid "Number of tweets"
 msgstr "Anzahl der Tweets"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:148
-#: ../includes/core/tpl/tweettee_admin_template.php:231
+#: ../includes/core/tpl/tweettee_admin_template.php:165
+#: ../includes/core/tpl/tweettee_admin_template.php:248
 msgid "Show only text"
 msgstr "Nur Text anzeigen"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:152
-#: ../includes/core/tpl/tweettee_admin_template.php:235
+#: ../includes/core/tpl/tweettee_admin_template.php:169
+#: ../includes/core/tpl/tweettee_admin_template.php:252
 msgid "All tweettee links with \"<b>rel=nofollow</b>\""
 msgstr "Alle tweettee Verbindungen mit \"<b>rel = nofollow</b> \""
 
-#: ../includes/core/tpl/tweettee_admin_template.php:156
-#: ../includes/core/tpl/tweettee_admin_template.php:239
+#: ../includes/core/tpl/tweettee_admin_template.php:173
+#: ../includes/core/tpl/tweettee_admin_template.php:256
 msgid "Wrap tweettee unit in \"<b>&lt;!--noindex--&gt;</b>\" (For SE Yandex)"
 msgstr ""
 "Wickeln Sie tweettee Einheit in \"<b>&lt;!--Noindex--&gt;</b> \" (Für SE "
 "Yandex)"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:161
+#: ../includes/core/tpl/tweettee_admin_template.php:178
 msgid "Widget"
 msgstr "Widget"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:186
+#: ../includes/core/tpl/tweettee_admin_template.php:203
 msgid "post tags"
 msgstr "Post Tags"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:189
+#: ../includes/core/tpl/tweettee_admin_template.php:206
 msgid "category name"
 msgstr "Kategorienamen"
 
-#: ../includes/core/tpl/tweettee_admin_template.php:243
+#: ../includes/core/tpl/tweettee_admin_template.php:260
 msgid "Save settings"
 msgstr "Einstellungen speichern"
+
+#~ msgid "Show tweettee unit on the home page"
+#~ msgstr "Zeigen tweettee Einheit auf der Homepage"
