@@ -4,8 +4,10 @@
     box-sizing: border-box;
 }
 
-p.message{
-    color:#f04040;
+h3.error_header{
+    color: #bc0b0b;
+    margin: 5px 0;
+    border-bottom: 1px solid #bc0b0b;
 }
 
 .account-wrapper{
@@ -14,7 +16,6 @@ p.message{
 }
 
 .account-body{
-    //height: 500px;
     margin: 5px;
     border-radius: 5px;
     padding:10px;
@@ -33,7 +34,6 @@ p.message{
     width:60%;
     margin: 10px auto;
     background: #fff;
-    //height: 150px;
     border-radius: 5px;
 }
 
@@ -59,7 +59,6 @@ legend{
 }
 
 #settings-main-page-block{
-    //background: #298cba;
     margin: 10px;
     border-radius: 5px;
     display: none;
@@ -68,7 +67,6 @@ legend{
 #search-result-for,
 #m-search-result-for{
     display: none;
-    //height:100px;
     
     margin: 10px;
     border-radius: 5px;
@@ -163,6 +161,10 @@ fieldset:nth-child(2){
     background: #a3daee;
 }
 
+fieldset:nth-child(3){
+    background: #ffbc5e;
+}
+
 fieldset:first-child legend{
     background: #afa;
     padding: 10px;
@@ -176,6 +178,17 @@ fieldset:first-child legend{
 
 fieldset:nth-child(2) legend{
     background: #86cee9;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    width: 150px;
+    text-align: center;
+}
+
+fieldset:nth-child(3) legend{
+    background: #ffbc5e;
     padding: 10px;
     border: 1px solid #aaa;
     border-bottom: 0;
@@ -200,6 +213,10 @@ fieldset:first-child  hr{
 
 fieldset:nth-child(2) hr{
     border:1px solid #86cee9;
+}
+
+fieldset:nth-child(3) hr{
+    border:1px solid #ffa72b;
 }
 
 .instructions,
