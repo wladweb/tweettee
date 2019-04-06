@@ -1,10 +1,16 @@
 <?php
 
-namespace Tweettee\Includes;
+namespace Wladweb\Tweettee\Includes;
 
-class Tweettee_Deactivator{
-    public static function deactivate(){
+use Wladweb\Tweettee\Includes\Core\TweetteeCache;
+
+class TweetteeDeactivator
+{
+
+    public static function deactivate()
+    {
         delete_option('tweettee');
+        TweetteeCache::deleteTable();
     }
-}
 
+}

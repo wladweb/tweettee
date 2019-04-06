@@ -1,21 +1,29 @@
 <?php
 
-namespace Tweettee\Includes;
+namespace Wladweb\Tweettee\Includes;
 
-class Tweettee_Locale{
-    
+class TweetteeLocale
+{
+    private $plugin_dir_path;
     private $domain;
     
-    public function set_domain($d){
+    public function __construct($path)
+    {
+        $this->plugin_dir_path = $path;
+    }
+
+    public function set_domain($d)
+    {
         $this->domain = $d;
     }
-    
-    public function load_plugin_textdomain(){
-        load_plugin_textdomain(
-                    $this->domain,
-                    false,
-                    dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
-                );
-    }
-}
 
+    public function load_plugin_textdomain()
+    {
+        load_plugin_textdomain(
+                $this->domain,
+                false,
+                $this->plugin_dir_path . 'languages/'
+        );
+    }
+
+}
