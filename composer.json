@@ -1,0 +1,22 @@
+{
+    "name": "wladweb/tweettee",
+    "description": "Wordpress plugin for Twitter",
+    "keywords": ["wordpress", "twitter", "plugin"],
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Vladimir Petrov",
+            "role": "developer"
+        }
+    ],
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=5.4",
+        "abraham/twitteroauth": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wladweb\\Tweettee\\": "src/"
+        }
+    }
+}
