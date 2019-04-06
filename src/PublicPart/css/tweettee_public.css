@@ -36,6 +36,7 @@
 
 #tweettee_main_content{
     width: 100%;
+    margin: 0 0 20px 0;
 }
 
 .tweettee_block{
@@ -48,9 +49,7 @@
     box-shadow: 0 0 5px #ddd;
 }
 
-.tweettee-block-header{
-    //
-}
+.tweettee-block-header{}
 
 .tweettee-block-header img{
     display: block;
@@ -90,9 +89,7 @@
     color: #006dcc;
 }
 
-.tweettee-block-footer{
-    //
-}
+.tweettee-block-footer{}
 
 .tweettee-block-date{
     text-align: center;
