@@ -269,6 +269,7 @@ class TweetteeCache
         $sql = "CREATE TABLE {$table_name} (
 	id varchar(30) NOT NULL default '',
 	prefix varchar(2) NOT NULL default '',
+	mark varchar(255) NOT NULL default 'default',
 	profile_image_url varchar(255) NOT NULL default '',
 	screen_name varchar(255) NOT NULL default '',
 	text text NOT NULL default '',
