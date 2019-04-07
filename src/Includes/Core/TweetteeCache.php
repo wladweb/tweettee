@@ -87,7 +87,7 @@ class TweetteeCache
         $this->wpdb = $wpdb;
         $this->table_name = $wpdb->get_blog_prefix() . self::TABLE;
         $this->settings = $settings;
-        $this->process();
+        $this->setup();
     }
 
     private function __clone()
@@ -103,7 +103,7 @@ class TweetteeCache
     /**
      * Determines current state of cache settings & set his further behavior
      */
-    private function process()
+    public function setup()
     {
         $cache_opt = $this->settings->getOption(['cache_enabled', 'cache_interval', 'cache_previous_state', 'cache_begin_timestamp']);
         $this->cache_enabled = $cache_opt['cache_enabled'];
@@ -171,10 +171,26 @@ class TweetteeCache
      */
     private function cacheMustBeUpdated()
     {
-        $this->clearTable();
+        $this->deleteRows('prefix', $this->prefix);
         $this->write_time = true;
         $this->show_time = false;
         $this->settings->setOption('cache_begin_timestamp', \time());
+    }
+    
+    public function deleteMainUnitCache()
+    {
+        $this->deleteRows('prefix', 'm_');
+    }
+    
+    public function deleteWidgetCache()
+    {
+        $this->deleteRows('prefix', 'w_');
+    }
+    
+    private function deleteRows($sign, $value)
+    {
+        $sql = "DELETE FROM $this->table_name WHERE $sign = '%s'";
+        $response = $this->wpdb->query($this->wpdb->prepare($sql, $value));
     }
     
     /**
@@ -227,13 +243,15 @@ class TweetteeCache
      */
     public function insert(array $tweets)
     {
-        $sql = "INSERT INTO {$this->table_name} (id, prefix, profile_image_url, screen_name, text, created_at) VALUES ";
+        $mark = 'inserted';
+        
+        $sql = "INSERT INTO {$this->table_name} (id, prefix, mark, profile_image_url, screen_name, text, created_at) VALUES ";
         $values = [];
         $placeholders = [];
 
         foreach ($tweets as $tweet) {
-            array_push($values, $tweet->id, $this->prefix, $tweet->profile_image_url, $tweet->screen_name, $tweet->text, $tweet->created_at);
-            array_push($placeholders, "('%s', '%s', '%s', '%s', '%s', '%s')");
+            array_push($values, $tweet->id, $this->prefix, $mark, $tweet->profile_image_url, $tweet->screen_name, $tweet->text, $tweet->created_at);
+            array_push($placeholders, "('%s', '%s', '%s', '%s', '%s', '%s', '%s')");
         }
 
         $sql .= implode(', ', $placeholders);

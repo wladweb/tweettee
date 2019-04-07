@@ -81,8 +81,6 @@ abstract class TweetteeBuilder
      */
     public function prepare()
     {
-        //$this->cache = TweetteeApp::$cache;
-        //$this->cache->setPrefix($this->prefix);
         $this->cache = TweetteeCache::getCache($this->settings);
         $this->cache->setPrefix($this->prefix);
         $this->twitteroauth = OAuth::getOauth($this->settings->getOptions(['consumer_key', 'consumer_secret', 'oauth_token', 'oauth_token_secret']));
@@ -94,7 +92,7 @@ abstract class TweetteeBuilder
      */
     protected function get_tweetts()
     {
-
+        
         if ($this->cache->isItFromCache()) {
             
             $data = $this->fromCache();

@@ -99,7 +99,9 @@ class TweetteeBuilderMain extends TweetteeBuilder
     {
         static $nr = 0;
         if ($this->position === ++$nr) {
+            echo "\r\n<!-- Begin $this->plugin_name plugin main unit, version: $this->version -->\r\n";
             echo $this->getTweetteeContent();
+            echo "\r\n<!-- End $this->plugin_name plugin main unit -->\r\n";
         }
     }
 

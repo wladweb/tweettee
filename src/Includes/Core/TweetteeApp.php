@@ -33,7 +33,6 @@ class TweetteeApp
         
         $this->loader = new TweetteeLoader;
         self::$tweettee_settings = new TweetteeSettings;
-        //self::$cache = TweetteeCache::getCache(self::$tweettee_settings);
         $this->session = new TweetteeSession;
         $this->twitter_access = new TwitterAccess($this->session);
         $this->builder_main = new TweetteeBuilderMain;
