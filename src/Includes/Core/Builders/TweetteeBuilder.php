@@ -94,19 +94,29 @@ abstract class TweetteeBuilder
      */
     protected function get_tweetts()
     {
-        if ($this->cache->isItFromCache()){
+
+        if ($this->cache->isItFromCache()) {
+            
             $data = $this->fromCache();
+            
         } else {
+            
             $data = $this->fromTwitter();
+
+            if ($this->cache->isItNeedToWriteIntoCache()) {
+                $this->cache->insert($this->toObject($data));
+            }
+            
         }
-        return $data;
+        
+        return $this->toObject($data);
     }
-    
+
     private function fromCache()
     {
         return $this->cache->get($this->prefix);
     }
-    
+
     private function fromTwitter()
     {
         $mode = (int) $this->options[$this->prefix . 'content_type'];
@@ -135,11 +145,7 @@ abstract class TweetteeBuilder
                 $params = $this->build_params($mode);
                 $data = $this->get_data('statuses/user_timeline', $params);
         }
-        
-        if ($this->cache->isItNeedToWriteIntoCache()){
-            $this->cache->insert($data);
-        }
-        
+
         return $data;
     }
 
@@ -241,13 +247,14 @@ abstract class TweetteeBuilder
 
         if (is_object($data) && isset($data->statuses)) {
             if (!empty($data->statuses)) {
-                return $this->prepareData($data->statuses);
+                $this->prepareData($data->statuses);
+                return $data->statuses;
             } else {
                 throw new TweetteePublicException("On request " . urldecode($params['q']) . " found nothing", 1004);
             }
         }
-
-        return $this->prepareData($data);
+        $this->prepareData($data);
+        return $data;
     }
 
     /**
@@ -273,10 +280,8 @@ abstract class TweetteeBuilder
      * Prepare twit text
      * @param array $data
      */
-    private function prepareData(array $data)
+    private function prepareData(array &$data)
     {
-        $result = [];
-        
         foreach ($data as $twit) {
 
             $hashtags = [];
@@ -302,16 +307,19 @@ abstract class TweetteeBuilder
                 $users_replace[] = $this->build_link('https://twitter.com/' . $url_obj->screen_name, $url_obj->screen_name);
             }
             $twit->text = str_replace($users, $users_replace, $twit->text);
-            
+        }
+    }
+
+    private function toObject(array $data)
+    {
+        $result = [];
+
+        foreach ($data as $item) {
             $tweet = new Tweet;
-            $tweet->id = $twit->id_str;
-            $tweet->profile_image_url = $twit->user->profile_image_url;
-            $tweet->screen_name = $twit->user->screen_name;
-            $tweet->text = $twit->text;
-            $tweet->created_at = $twit->created_at;
+            $tweet->set($item);
             array_push($result, $tweet);
         }
-        
+
         return $result;
     }
 

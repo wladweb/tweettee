@@ -42,7 +42,7 @@ class TweetteePublic
         
         $this->tweettee_builder_main->prepare();
         
-        add_action( 'the_post', [$this->tweettee_builder_main, 'draw_tweettee'] );
-        add_action( 'loop_end', [$this->tweettee_builder_main, 'erase_tweettee']  );
+        add_action( 'the_post', [$this->tweettee_builder_main, 'draw_tweettee']);
+        add_action( 'loop_end', [$this->tweettee_builder_main, 'erase_tweettee']);
     }
 }
