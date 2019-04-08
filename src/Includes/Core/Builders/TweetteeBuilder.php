@@ -82,7 +82,6 @@ abstract class TweetteeBuilder
     public function prepare()
     {
         $this->cache = TweetteeCache::getCache($this->settings);
-        $this->cache->setPrefix($this->prefix);
         $this->twitteroauth = OAuth::getOauth($this->settings->getOptions(['consumer_key', 'consumer_secret', 'oauth_token', 'oauth_token_secret']));
     }
 
@@ -94,10 +93,11 @@ abstract class TweetteeBuilder
     {
         $content_type = (int)$this->options['w_content_type'];
         $search_type = (int)$this->options['w_search_type'];
+        $this->cache->setPrefix($this->prefix);
         
         if (($content_type === 5) && (($search_type === 1) || ($search_type === 2))){
             
-            $this->cache->setSpecialBehavior();
+            $this->cache->setSpecialBehavior($this->get_search_value($search_type));
         }
         
         if ($this->cache->canReadFromCache()) {
@@ -193,7 +193,7 @@ abstract class TweetteeBuilder
      * @return string
      * @throws TweetteePublicException
      */
-    private function get_search_value($search_mode)
+    private function get_search_value($search_mode, $encode = true)
     {
         global $post;
         $id = $post->ID;
@@ -228,8 +228,13 @@ abstract class TweetteeBuilder
 
                 $search_word = $tags_arr[0];
         }
-
-        return urlencode($search_word);
+        
+        if ($encode){
+            return urlencode($search_word);
+        } else {
+            return $search_word;
+        }
+        
     }
 
     /**
@@ -275,7 +280,7 @@ abstract class TweetteeBuilder
             $rel_nofollow = ' rel="nofollow" ';
         }
 
-        $link = "<a href='{$url}'{$rel_nofollow} target='_blank'>{$text}</a>";
+        $link = "<a href=\"{$url}\"{$rel_nofollow} target=\"_blank\">{$text}</a>";
         return $link;
     }
 
