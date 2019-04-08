@@ -55,7 +55,7 @@ class TweetteeCache
      * is cache enabled now
      * @var string|boolean
      */
-    private $cache_enabled;
+    //private $cache_enabled;
     
     /**
      * Time interval cache will updated in
@@ -89,6 +89,7 @@ class TweetteeCache
     
     private $special_behavior = false;
     private $mark = '';
+    private $cache_enabled = false;
 
     private function __construct(TweetteeSettings $settings)
     {
@@ -109,6 +110,12 @@ class TweetteeCache
         //
     }
     
+    public function isCacheEnabled()
+    {
+        return $this->cache_enabled;
+    }
+
+
     /**
      * Determines current state of cache settings & set his further behavior
      */
@@ -130,7 +137,8 @@ class TweetteeCache
             }
         } elseif ($this->cache_enabled === 'checked') { //state wasnt changed and cache is On
             
-            $this->show_time = true;
+            //$this->show_time = true;
+            $this->cache_enabled = true;
             
             if (((int)$this->cache_begin_timestamp + $this->getTimestamp()) < \time()){
                 $this->cacheMustBeUpdated();
@@ -169,14 +177,20 @@ class TweetteeCache
     private function cacheWasTurnedOn()
     {
         $this->settings->setOption(['cache_previous_state' => $this->cache_enabled, 'cache_begin_timestamp' => \time()]);
-        $this->write_time = true;
+        $this->cache_enabled = true;
+        
+        /*
+         * $this->write_time = true;
+         */
+        
     }
     
     /**
      * Like trigger 'Cache Off' handler
      */
     private function cacheWasTurnedOff()
-    {
+    {   
+        $this->cache_enabled = false;
         $this->settings->setOption(['cache_previous_state' => $this->cache_enabled, 'cache_begin_timestamp' => null]);
         $this->clearTable();
     }
@@ -186,10 +200,9 @@ class TweetteeCache
      */
     private function cacheMustBeUpdated()
     {
-        echo '1', '<hr>';
-        $this->write_time = true;
+        //$this->write_time = true;
         $this->update_time = true;
-        $this->show_time = false;
+        //$this->show_time = false;
         $this->settings->setOption('cache_begin_timestamp', \time());
     }
     
@@ -255,9 +268,21 @@ class TweetteeCache
      * @param string $prefix
      * @return array|null
      */
-    public function get($prefix)
+    public function get()
     {
-        $sql = "SELECT id, prefix, profile_image_url, screen_name, text, created_at FROM {$this->table_name} WHERE prefix = '{$prefix}'";
+        if ($this->update_time){
+            return false;
+        }
+        
+        if ($this->special_behavior){
+            
+            $sql = "SELECT id, prefix, profile_image_url, screen_name, text, created_at FROM {$this->table_name} WHERE mark = '{$this->mark}'";
+            
+        } else {
+            
+            $sql = "SELECT id, prefix, profile_image_url, screen_name, text, created_at FROM {$this->table_name} WHERE prefix = '{$this->prefix}' AND mark = 'default'";
+        }
+        
         $data = $this->wpdb->get_results($sql, ARRAY_A);
         return $data;
     }
@@ -269,7 +294,8 @@ class TweetteeCache
     public function insert(array $tweets)
     {
         if ($this->update_time){
-            $this->deleteOldCache();
+            //$this->deleteOldCache();
+            $this->clearTable();
         }
         
         $mark = 'default';

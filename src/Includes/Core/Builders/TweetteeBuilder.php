@@ -7,6 +7,7 @@ use Wladweb\Tweettee\Includes\Core\OAuth;
 use Wladweb\Tweettee\Includes\Core\TweetteeCache;
 use Wladweb\Tweettee\Includes\Core\Exceptions\TweetteePublicException;
 use Wladweb\Tweettee\Includes\Core\Tweet;
+use Wladweb\Tweettee\Includes\Core\Builders\TweetteeBuilderWidget;
 
 /**
  * Parent class with common methods for 2 builders
@@ -95,11 +96,22 @@ abstract class TweetteeBuilder
         $search_type = (int)$this->options['w_search_type'];
         $this->cache->setPrefix($this->prefix);
         
-        if (($content_type === 5) && (($search_type === 1) || ($search_type === 2))){
-            
-            $this->cache->setSpecialBehavior($this->get_search_value($search_type));
+        if (($this->prefix === TweetteeBuilderWidget::PREFIX) && ($content_type === 5) && (($search_type === 1) || ($search_type === 2))){
+            $this->cache->setSpecialBehavior($this->get_search_value($search_type, false));
         }
         
+        if ($this->cache->isCacheEnabled()){
+            
+            if (!$data = $this->fromCache()){
+                $data = $this->fromTwitter();
+                $this->cache->insert($this->toObject($data));
+            }
+        } else {
+            $data = $this->fromTwitter();
+        }
+        
+        
+/*
         if ($this->cache->canReadFromCache()) {
             
             $data = $this->fromCache();
@@ -112,12 +124,26 @@ abstract class TweetteeBuilder
                 $this->cache->insert($this->toObject($data));
             }
         }
+*/
+        /**
+         * 
+         * #data = $this->cache->get();
+         * 
+         * if (!$data){
+         *      $this->fromTwitter();
+         *      if ($cacheIsOn){
+         *          $cache->write();
+         *      }
+         * }
+         * 
+         */
+        
         return $this->toObject($data);
     }
 
     private function fromCache()
     {
-        return $this->cache->get($this->prefix);
+        return $this->cache->get();
     }
 
     private function fromTwitter()
