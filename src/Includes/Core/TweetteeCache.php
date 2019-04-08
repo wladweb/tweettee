@@ -34,6 +34,12 @@ class TweetteeCache
     private $write_time = false;
     
     /**
+     * Cache must be updated
+     * @var boolean
+     */
+    private $update_time = false;
+    
+    /**
      * Wordpress db object
      * @var wpdb 
      */
@@ -80,6 +86,8 @@ class TweetteeCache
      * @var string
      */
     private $prefix;
+    
+    private $special_behavior = false;
 
     private function __construct(TweetteeSettings $settings)
     {
@@ -130,6 +138,19 @@ class TweetteeCache
     }
     
     /**
+     * Контсруктор настраивает объект ОДИН РАЗ!!! ЭТО БЛЯТЬ СИНГЛТОН!!!
+     * 
+     * Удаление -- префикс, марк (каждый раз для двух вызовов)
+     * Запись -- данные на запись, префикс, марк (каждый раз для двух вызовов)
+     *           При апдейте каждого вызова происходит удаление старого кеша для каждой части
+     *           При выключении - очистка таблицы
+     *           При включении - запись для двух частей
+     * 
+     * 
+     */
+    
+    
+    /**
      * Converts cache interval setting into timestamp format
      * @return int
      */
@@ -137,6 +158,11 @@ class TweetteeCache
     {
         list($hours, $minutes) = explode(':', $this->cache_interval);
         return ((int)$hours * 3600) + ((int)$minutes * 60);
+    }
+    
+    public function setSpecialBehavior()
+    {
+        $this->special_behavior = true;
     }
     
     /**
@@ -171,9 +197,9 @@ class TweetteeCache
      */
     private function cacheMustBeUpdated()
     {
-        $this->deleteRows('prefix', $this->prefix);
+        //$this->deleteRows('prefix', $this->prefix);
         $this->write_time = true;
-        $this->show_time = false;
+        $this->update_time = true;
         $this->settings->setOption('cache_begin_timestamp', \time());
     }
     
@@ -211,16 +237,16 @@ class TweetteeCache
      * Public indicator that data will be getting from cache or not
      * @return boolean
      */
-    public function isItFromCache()
+    public function canReadFromCache()
     {
         return $this->show_time;
     }
 
     /**
-     * Is it need to write into cache?  hmmm...
+     * Can write into cache?
      * @return boolean
      */
-    public function isItNeedToWriteIntoCache()
+    public function canWriteIntoCache()
     {
         return $this->write_time;
     }
@@ -243,6 +269,10 @@ class TweetteeCache
      */
     public function insert(array $tweets)
     {
+        if ($this->update_time){
+            //delete rows
+        }
+        
         $mark = 'inserted';
         
         $sql = "INSERT INTO {$this->table_name} (id, prefix, mark, profile_image_url, screen_name, text, created_at) VALUES ";

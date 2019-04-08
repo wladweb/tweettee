@@ -92,8 +92,15 @@ abstract class TweetteeBuilder
      */
     protected function get_tweetts()
     {
+        $content_type = (int)$this->options['w_content_type'];
+        $search_type = (int)$this->options['w_search_type'];
         
-        if ($this->cache->isItFromCache()) {
+        if (($content_type === 5) && (($search_type === 1) || ($search_type === 2))){
+            
+            $this->cache->setSpecialBehavior();
+        }
+        
+        if ($this->cache->canReadFromCache()) {
             
             $data = $this->fromCache();
             
@@ -101,12 +108,10 @@ abstract class TweetteeBuilder
             
             $data = $this->fromTwitter();
 
-            if ($this->cache->isItNeedToWriteIntoCache()) {
+            if ($this->cache->canWriteIntoCache()) {
                 $this->cache->insert($this->toObject($data));
             }
-            
         }
-        
         return $this->toObject($data);
     }
 
