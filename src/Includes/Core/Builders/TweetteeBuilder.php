@@ -16,8 +16,8 @@ abstract class TweetteeBuilder
 {
 
     /**
-     *
-     * @var string Plugin name
+     * Plugin name
+     * @var string
      */
     protected $plugin_name;
 
@@ -92,60 +92,41 @@ abstract class TweetteeBuilder
      */
     protected function get_tweetts()
     {
-        $content_type = (int)$this->options['w_content_type'];
-        $search_type = (int)$this->options['w_search_type'];
+        $content_type = (int) $this->options['w_content_type'];
+        $search_type = (int) $this->options['w_search_type'];
         $this->cache->setPrefix($this->prefix);
-        
-        if (($this->prefix === TweetteeBuilderWidget::PREFIX) && ($content_type === 5) && (($search_type === 1) || ($search_type === 2))){
+
+        if (($this->prefix === TweetteeBuilderWidget::PREFIX) && ($content_type === 5) && (($search_type === 1) || ($search_type === 2))) {
             $this->cache->setSpecialBehavior($this->get_search_value($search_type, false));
         }
-        
-        if ($this->cache->isCacheEnabled()){
-            
-            if (!$data = $this->fromCache()){
+
+        if ($this->cache->isCacheEnabled()) {
+
+            if (!$data = $this->fromCache()) {
+
                 $data = $this->fromTwitter();
                 $this->cache->insert($this->toObject($data));
             }
         } else {
             $data = $this->fromTwitter();
         }
-        
-        
-/*
-        if ($this->cache->canReadFromCache()) {
-            
-            $data = $this->fromCache();
-            
-        } else {
-            
-            $data = $this->fromTwitter();
 
-            if ($this->cache->canWriteIntoCache()) {
-                $this->cache->insert($this->toObject($data));
-            }
-        }
-*/
-        /**
-         * 
-         * #data = $this->cache->get();
-         * 
-         * if (!$data){
-         *      $this->fromTwitter();
-         *      if ($cacheIsOn){
-         *          $cache->write();
-         *      }
-         * }
-         * 
-         */
-        
         return $this->toObject($data);
     }
 
+    /**
+     * Get twitts from cache
+     * @return array|null|false
+     */
     private function fromCache()
     {
         return $this->cache->get();
     }
 
+    /**
+     * Get twitts from twitter
+     * @return array
+     */
     private function fromTwitter()
     {
         $mode = (int) $this->options[$this->prefix . 'content_type'];
@@ -254,13 +235,12 @@ abstract class TweetteeBuilder
 
                 $search_word = $tags_arr[0];
         }
-        
-        if ($encode){
+
+        if ($encode) {
             return urlencode($search_word);
         } else {
             return $search_word;
         }
-        
     }
 
     /**
@@ -344,6 +324,12 @@ abstract class TweetteeBuilder
         }
     }
 
+    /**
+     * Transform twitts to object
+     * 
+     * @param array $data
+     * @return array
+     */
     private function toObject(array $data)
     {
         $result = [];

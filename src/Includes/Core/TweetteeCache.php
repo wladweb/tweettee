@@ -10,85 +10,89 @@ use Wladweb\Tweettee\Includes\Core\Log\Logger;
  */
 class TweetteeCache
 {
+
     /**
      * Table
      */
     const TABLE = 'tweettee_cache';
-    
+
     /**
      * Instance of self
      * @var TweetteeCache 
      */
     private static $instance;
-    
-    /**
-     * Must to show twitts from cache
-     * @var boolean 
-     */
-    private $show_time = false;
-    
-    /**
-     * Must to write twitts into cache
-     * @var boolean
-     */
-    private $write_time = false;
-    
+
     /**
      * Cache must be updated
      * @var boolean
      */
     private $update_time = false;
-    
+
     /**
      * Wordpress db object
      * @var wpdb 
      */
     private $wpdb;
-    
+
     /**
      * Plugin settings object
      * @var TweetteeSettings 
      */
     private $settings;
-    
-    /**
-     * is cache enabled now
-     * @var string|boolean
-     */
-    //private $cache_enabled;
-    
+
     /**
      * Time interval cache will updated in
      * @var string|boolean 
      */
     private $cache_interval;
-    
+
     /**
      * Last cache state
      * @var string|boolean
      */
     private $cache_previous_state;
-    
+
     /**
      * Time mark of begin cache countdown
      * @var int
      */
     private $cache_begin_timestamp;
-    
+
     /**
      * Cache table name with wp prefix
      * @var string
      */
     private $table_name;
-    
+
     /**
-     * Mark who's calling  cache object
+     * Who's calling  cache object
      * @var string
      */
     private $prefix;
-    
+
+    /**
+     * This is due to widget type setting
+     * If widget had set to show twitts by post tag || category name,
+     * it means that almost every post page will have different twitts list,
+     * unlike if setiings is show HomeTimeline, for example, which will have
+     * the same twitts set on any page.
+     * 
+     * @var boolean
+     */
     private $special_behavior = false;
+
+    /**
+     * Mark for twitts in 'special mode'
+     * post_tag || category_name
+     * 
+     * @var string
+     */
     private $mark = '';
+
+    /**
+     * Is cache enabled
+     * @var boolean
+     */
     private $cache_enabled = false;
 
     private function __construct(TweetteeSettings $settings)
@@ -109,12 +113,15 @@ class TweetteeCache
     {
         //
     }
-    
+
+    /**
+     * Is cache enabled now
+     * @return boolean
+     */
     public function isCacheEnabled()
     {
         return $this->cache_enabled;
     }
-
 
     /**
      * Determines current state of cache settings & set his further behavior
@@ -136,16 +143,14 @@ class TweetteeCache
                 $this->cacheWasTurnedOff();
             }
         } elseif ($this->cache_enabled === 'checked') { //state wasnt changed and cache is On
-            
-            //$this->show_time = true;
             $this->cache_enabled = true;
-            
-            if (((int)$this->cache_begin_timestamp + $this->getTimestamp()) < \time()){
+
+            if (((int) $this->cache_begin_timestamp + $this->getTimestamp()) < \time()) { //cache interval is done, need update
                 $this->cacheMustBeUpdated();
             }
         }
     }
-    
+
     /**
      * Converts cache interval setting into timestamp format
      * @return int
@@ -153,15 +158,19 @@ class TweetteeCache
     private function getTimestamp()
     {
         list($hours, $minutes) = explode(':', $this->cache_interval);
-        return ((int)$hours * 3600) + ((int)$minutes * 60);
+        return ((int) $hours * 3600) + ((int) $minutes * 60);
     }
-    
+
+    /**
+     * Set special mode
+     * @param string $mark
+     */
     public function setSpecialBehavior($mark)
     {
         $this->mark = $mark;
         $this->special_behavior = true;
     }
-    
+
     /**
      * Informs cache object who called him 
      * @param string $prefix
@@ -170,7 +179,7 @@ class TweetteeCache
     {
         $this->prefix = $prefix;
     }
-    
+
     /**
      * Like trigger 'Cache On' handler
      */
@@ -178,59 +187,27 @@ class TweetteeCache
     {
         $this->settings->setOption(['cache_previous_state' => $this->cache_enabled, 'cache_begin_timestamp' => \time()]);
         $this->cache_enabled = true;
-        
-        /*
-         * $this->write_time = true;
-         */
-        
     }
-    
+
     /**
      * Like trigger 'Cache Off' handler
      */
     private function cacheWasTurnedOff()
-    {   
+    {
         $this->cache_enabled = false;
         $this->settings->setOption(['cache_previous_state' => $this->cache_enabled, 'cache_begin_timestamp' => null]);
         $this->clearTable();
     }
-    
+
     /**
      * Like trigger 'Cache Update' handler
      */
     private function cacheMustBeUpdated()
     {
-        //$this->write_time = true;
         $this->update_time = true;
-        //$this->show_time = false;
         $this->settings->setOption('cache_begin_timestamp', \time());
     }
-    
-    private function deleteOldCache()
-    {
-        if ($this->special_behavior){
-            $this->specialDelete();
-        } else {
-            $this->regularDelete();
-        }
-    }
-    
-    public function regularDelete()
-    {
-        $this->deleteRows('prefix', $this->prefix);
-    }
-    
-    public function specialDelete()
-    {
-        $this->deleteRows('mark', $this->mark);
-    }
-    
-    private function deleteRows($sign, $value)
-    {
-        $sql = "DELETE FROM $this->table_name WHERE $sign = '%s'";
-        $response = $this->wpdb->query($this->wpdb->prepare($sql, $value));
-    }
-    
+
     /**
      * Singleton stuff
      * @param TweetteeSettings $settings
@@ -244,66 +221,48 @@ class TweetteeCache
 
         return self::$instance;
     }
-    
-    /**
-     * Public indicator that data will be getting from cache or not
-     * @return boolean
-     */
-    public function canReadFromCache()
-    {
-        return $this->show_time;
-    }
 
     /**
-     * Can write into cache?
-     * @return boolean
-     */
-    public function canWriteIntoCache()
-    {
-        return $this->write_time;
-    }
-    
-    /**
-     * Just select twitts from cache table
-     * @param string $prefix
-     * @return array|null
+     * Select twitts from cache table, return false if need update
+     * @return array|null|false
      */
     public function get()
     {
-        if ($this->update_time){
+        if ($this->update_time) {
             return false;
         }
-        
-        if ($this->special_behavior){
-            
-            $sql = "SELECT id, prefix, profile_image_url, screen_name, text, created_at FROM {$this->table_name} WHERE mark = '{$this->mark}'";
-            
+
+        $sql = "SELECT id, prefix, profile_image_url, screen_name, text, created_at FROM {$this->table_name} WHERE ";
+
+        if ($this->special_behavior) {
+
+            $sql .= "mark = '{$this->mark}'";
         } else {
-            
-            $sql = "SELECT id, prefix, profile_image_url, screen_name, text, created_at FROM {$this->table_name} WHERE prefix = '{$this->prefix}' AND mark = 'default'";
+
+            $sql .= "prefix = '{$this->prefix}' AND mark = 'default'";
         }
-        
+
         $data = $this->wpdb->get_results($sql, ARRAY_A);
         return $data;
     }
-    
+
     /**
      * Insert twitts into cache table
      * @param array $tweets
      */
     public function insert(array $tweets)
     {
-        if ($this->update_time){
-            //$this->deleteOldCache();
+        if ($this->update_time) {
+
             $this->clearTable();
         }
-        
+
         $mark = 'default';
-        
-        if ($this->special_behavior){
+
+        if ($this->special_behavior) {
             $mark = $this->mark;
         }
-        
+
         $sql = "INSERT INTO {$this->table_name} (id, prefix, mark, profile_image_url, screen_name, text, created_at) VALUES ";
         $values = [];
         $placeholders = [];
@@ -321,7 +280,7 @@ class TweetteeCache
             Logger::write(__CLASS__ . ' Cant write into database.');
         }
     }
-    
+
     /**
      * Clear cache table
      */
@@ -330,7 +289,7 @@ class TweetteeCache
         $sql = "TRUNCATE TABLE {$this->table_name}";
         $this->wpdb->query($sql);
     }
-    
+
     /**
      * Create cache table
      * @global wpdb $wpdb
@@ -356,7 +315,7 @@ class TweetteeCache
 
         dbDelta($sql);
     }
-    
+
     /**
      * Delete cache table
      * @global wpdb $wpdb
