@@ -8,6 +8,7 @@ use Wladweb\Tweettee\Includes\Core\I\SettingsInterface;
 use Wladweb\Tweettee\Includes\Core\Exceptions\TweetteeAdminException;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Abraham\TwitterOAuth\TwitterOAuthException;
+use Wladweb\Tweettee\Includes\Core\Log\Logger;
 
 /**
  * Twitter authorization 
@@ -191,6 +192,8 @@ class TwitterAccess implements AccessInterface
         } catch (TwitterOAuthException $e) {
             throw new TweetteeAdminException($e->getMessage(), $e->getCode(), $e);
         }
+        
+        Logger::write('Authentification successful. Got access token');
         
         $account_info = $this->getAccountInfo($oauth, $access_token);
         $access_token['account_info'] = $account_info;

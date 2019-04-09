@@ -3,6 +3,7 @@
 namespace Wladweb\Tweettee\Includes;
 
 use Wladweb\Tweettee\Includes\Core\TweetteeCache;
+use Wladweb\Tweettee\Includes\Core\Log\Logger;
 
 class TweetteeActivator
 {
@@ -49,6 +50,8 @@ class TweetteeActivator
         add_option('tweettee', $value);
         
         TweetteeCache::createTable();
+        
+        Logger::write('Plugin was activated. Plugin settings reset to default values, cache table was created.');
     }
 
 }

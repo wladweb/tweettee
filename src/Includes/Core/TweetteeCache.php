@@ -187,6 +187,7 @@ class TweetteeCache
     {
         $this->settings->setOption(['cache_previous_state' => $this->cache_enabled, 'cache_begin_timestamp' => \time()]);
         $this->cache_enabled = true;
+        Logger::write('Cache was enabled.');
     }
 
     /**
@@ -197,6 +198,7 @@ class TweetteeCache
         $this->cache_enabled = false;
         $this->settings->setOption(['cache_previous_state' => $this->cache_enabled, 'cache_begin_timestamp' => null]);
         $this->clearTable();
+        Logger::write('Cache was disabled. All cache data has been deleted.');
     }
 
     /**

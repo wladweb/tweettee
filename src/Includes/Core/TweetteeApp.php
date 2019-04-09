@@ -11,7 +11,6 @@ use Wladweb\Tweettee\Includes\Core\TwitterAccess;
 use Wladweb\Tweettee\Includes\TweetteeSession;
 use Wladweb\Tweettee\Includes\Core\Builders\TweetteeBuilderMain;
 use Wladweb\Tweettee\Includes\Core\Builders\TweetteeBuilderWidget;
-use Wladweb\Tweettee\Includes\Core\TweetteeCache;
 
 class TweetteeApp
 {
