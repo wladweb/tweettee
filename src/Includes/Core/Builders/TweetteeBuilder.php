@@ -209,7 +209,7 @@ abstract class TweetteeBuilder
             case 1:
                 $tags_arr = wp_get_post_tags($id, array('fields' => 'names'));
                 if (empty($tags_arr)) {
-                    throw new TweetteePublicException("The post $post->post_name havent tags", 1002);
+                    throw new TweetteePublicException("The post $post->post_title havent tags", 1002);
                 }
 
                 $search_word = $tags_arr[0];
@@ -218,7 +218,7 @@ abstract class TweetteeBuilder
                 $cat_arr = get_the_category($id);
 
                 if (empty($cat_arr)) {
-                    throw new TweetteePublicException("The post $post->post_name havent category", 1003);
+                    throw new TweetteePublicException("The post $post->post_title havent category", 1003);
                 }
                 $search_word = $cat_arr[0]->name;
                 break;
@@ -317,8 +317,8 @@ abstract class TweetteeBuilder
             $users = [];
             $users_replace = [];
             foreach ($twit->entities->user_mentions as $url_obj) {
-                $users[] = $url_obj->screen_name;
-                $users_replace[] = $this->build_link('https://twitter.com/' . $url_obj->screen_name, $url_obj->screen_name);
+                $users[] = '@' . $url_obj->screen_name;
+                $users_replace[] = $this->build_link('https://twitter.com/' . $url_obj->screen_name, '@' . $url_obj->screen_name);
             }
             $twit->text = str_replace($users, $users_replace, $twit->text);
         }

@@ -39,7 +39,13 @@ class TweetteeCache
      * @var TweetteeSettings 
      */
     private $settings;
-
+    
+    /**
+     *
+     * @var boolean 
+     */
+    private $cache_on;
+    
     /**
      * Time interval cache will updated in
      * @var string|boolean 
@@ -120,7 +126,7 @@ class TweetteeCache
      */
     public function isCacheEnabled()
     {
-        return $this->cache_enabled;
+        return $this->cache_on;
     }
 
     /**
@@ -143,7 +149,7 @@ class TweetteeCache
                 $this->cacheWasTurnedOff();
             }
         } elseif ($this->cache_enabled === 'checked') { //state wasnt changed and cache is On
-            $this->cache_enabled = true;
+            $this->cache_on = true;
 
             if (((int) $this->cache_begin_timestamp + $this->getTimestamp()) < \time()) { //cache interval is done, need update
                 $this->cacheMustBeUpdated();
@@ -156,8 +162,13 @@ class TweetteeCache
      * @return int
      */
     private function getTimestamp()
-    {
-        list($hours, $minutes) = explode(':', $this->cache_interval);
+    {   
+        if (empty($this->cache_interval)){
+            $hours = $minutes = 0;
+        } else {
+            list($hours, $minutes) = explode(':', $this->cache_interval);
+        }
+        
         return ((int) $hours * 3600) + ((int) $minutes * 60);
     }
 
@@ -186,7 +197,8 @@ class TweetteeCache
     private function cacheWasTurnedOn()
     {
         $this->settings->setOption(['cache_previous_state' => $this->cache_enabled, 'cache_begin_timestamp' => \time()]);
-        $this->cache_enabled = true;
+        //$this->cache_enabled = 'checked';
+        $this->cache_on = true;
         Logger::write('Cache was enabled.');
     }
 
@@ -195,7 +207,7 @@ class TweetteeCache
      */
     private function cacheWasTurnedOff()
     {
-        $this->cache_enabled = false;
+        $this->cache_on = false;
         $this->settings->setOption(['cache_previous_state' => $this->cache_enabled, 'cache_begin_timestamp' => null]);
         $this->clearTable();
         Logger::write('Cache was disabled. All cache data has been deleted.');
