@@ -22,7 +22,7 @@ class TweetteeLocale
         load_plugin_textdomain(
                 $this->domain,
                 false,
-                $this->plugin_dir_path . 'languages/'
+                'tweettee/src/languages/'
         );
     }
 

@@ -7,7 +7,7 @@
         <div class="instructions">
             <ol>
                 <li><?php _e('Create new Application on ', 'tweettee'); ?><a href="https://developer.twitter.com/en/apps" target="_blank">https://developer.twitter.com/en/apps</a></li>
-                <li><?php _e('Fill in the <b>Callback URL</b> field with: ', 'tweettee'); echo '<b>', admin_url('options-general.php'), '</b>';?></li>
+                <li><?php _e('Fill in the <b>Callback URL</b> field with ', 'tweettee'); echo '<b>', admin_url('options-general.php'), '</b>';?></li>
                 <li><?php _e('Copy <b>Consumer Key</b> and <b>Consuner Secret</b>, and paste in form bellow.', 'tweettee'); ?></li>
                 <li><?php _e('Send form.', 'tweettee'); ?></li>
                 <li><?php _e('Accept authorisation.', 'tweettee'); ?></li>
@@ -84,13 +84,14 @@
                 <legend><?php _e('Home page block', 'tweettee'); ?></legend>
 
                 <input class="checkbox" type="checkbox" id="show-main-page-settings" name="show_main_page_settings" value="checked" <?= $options['show_main_page_settings'] ?>>
-                <label for="show-main-page-settings"><?php _e('Show tweettee unit on the home page. (Not for all themes)', 'tweettee'); ?></label>
+                <label for="show-main-page-settings"><?php _e('Show tweettee unit on the home page. (Experimental. 
+Suitable not for every template)', 'tweettee'); ?></label>
 
                 <div id="settings-main-page-block">
                     <div>
 
                         <input type="text" name="m_position" id="m-after-post" value="<?= $options['m_position'] ?>" size="2" maxlength="2">
-                        <label for="m-after-post"><?php _e('After which post show unit with tweets', 'tweettee'); ?></label>
+                        <label for="m-after-post"><?php _e('Tweettee block position number in post list on home page', 'tweettee'); ?></label>
                         <br>
 
                         <input type="radio" name="m_content_type" id="m-tweettee-my-twits" value="1" <?= $m_content_1 ?>>
@@ -112,10 +113,10 @@
                         <br>
 
                         <input type="radio" name="m_content_type" id="m-tweettee-search-result" value="5" <?= $m_content_5 ?>>
-                        <label for="m-tweettee-search-result"><?php _e('Search by :', 'tweettee'); ?></label>
+                        <label for="m-tweettee-search-result"><?php _e('Search by ', 'tweettee'); ?></label>
                         <div id="m-search-result-for">
                             <input type="radio" name="m_search_type" id="m-tweettee-search-free-word" value="4" <?= $m_search_content_4 ?>>
-                            <label for="m-tweettee-search-free-word"><?php _e('free word', 'tweettee'); ?></label>
+                            <label for="m-tweettee-search-free-word"><?php _e('any word', 'tweettee'); ?></label>
                             <input type="text" id="m-tweettee-free-word-value" name="m_search_word" size="20" value="<?= $options['m_search_word'] ?>">
                             <span id="m-tweettee-free-word-error"></span>
 
@@ -189,7 +190,7 @@
                     <br>
 
                     <input type="radio" name="w_content_type" id="tweettee-search-result" value="5" <?= $widget_content_5 ?>>
-                    <label for="tweettee-search-result"><?php _e('Search by :', 'tweettee'); ?></label>
+                    <label for="tweettee-search-result"><?php _e('Search by ', 'tweettee'); ?></label>
                     <div id="search-result-for">
                         <input type="radio" name="w_search_type" id="tweettee-search-post-bookmark" value="1" <?= $search_content_1 ?>>
                         <label for="tweettee-search-post-bookmark"><?php _e('post tags', 'tweettee'); ?></label>
@@ -198,7 +199,7 @@
                         <label for="tweettee-search-category-name"><?php _e('category name', 'tweettee'); ?></label>
                         <br>
                         <input type="radio" name="w_search_type" id="tweettee-search-free-word" value="4" <?= $search_content_4 ?>>
-                        <label for="tweettee-search-free-word"><?php _e('free word', 'tweettee'); ?></label>
+                        <label for="tweettee-search-free-word"><?php _e('any word', 'tweettee'); ?></label>
                         <input type="text" id="tweettee-free-word-value" name="w_search_word" size="20" value="<?= $options['w_search_word'] ?>">
                         <span id="tweettee-free-word-error"></span>
 
@@ -257,7 +258,7 @@
                 
                 <label for="cache-time"><?php _e('Cache interval', 'tweettee'); ?></label>
                 <input type="time" id="cache-time" name="cache_interval" step="60" value="<?= $options['cache_interval'] ?>">
-                <span>(In this time cache will be updated)</span>
+                <span>(<?php _e('In this time cache will be updated', 'tweettee'); ?>)</span>
                 
             </fieldset>
 
