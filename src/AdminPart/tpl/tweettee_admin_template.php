@@ -6,10 +6,11 @@
 
         <div class="instructions">
             <ol>
-                <li><?php _e('Create new Application on ', 'tweettee'); ?><a href="https://apps.twitter.com/" target="_blank">https://apps.twitter.com/</a></li>
-                <li><?php _e('Input <b>Callback URL</b> any correct url. Example: ', 'tweettee'); ?>http://test.loc</li>
-                <li><?php _e('Copy <b>Consumer Key</b> and <b>Consuner Secret</b> in form.', 'tweettee'); ?></li>
-                <li><?php _e('Send form and follow the instructions.', 'tweettee'); ?></li>
+                <li><?php _e('Create new Application on ', 'tweettee'); ?><a href="https://developer.twitter.com/en/apps" target="_blank">https://developer.twitter.com/en/apps</a></li>
+                <li><?php _e('Fill in the <b>Callback URL</b> field with: ', 'tweettee'); echo '<b>', admin_url('options-general.php'), '</b>';?></li>
+                <li><?php _e('Copy <b>Consumer Key</b> and <b>Consuner Secret</b>, and paste in form bellow.', 'tweettee'); ?></li>
+                <li><?php _e('Send form.', 'tweettee'); ?></li>
+                <li><?php _e('Accept authorisation.', 'tweettee'); ?></li>
             </ol>
         </div>
         <div class="first-form"> 

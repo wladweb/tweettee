@@ -3,8 +3,9 @@
 Wordpress plugin for Twitter
 
 <ol>
-    <li>Create new Application on <a href="https://apps.twitter.com/" target="_blank">https://apps.twitter.com/</a></li>
-    <li>Input <b>Callback URL</b> any correct url. Example: http://test.loc</li>
-    <li>Copy <b>Consumer Key</b> and <b>Consuner Secret</b> in form.</li>
-    <li>Send form and follow the instructions.</li>
+    <li>Create new Application on <a href="https://developer.twitter.com/en/apps" target="_blank">https://developer.twitter.com/en/apps</a></li>
+    <li>Fill in the <b>Callback URL</b> field with: {your_schema}://{your_site}/wp-admin/options-general.php</li>
+    <li>Copy <b>Consumer Key</b> and <b>Consuner Secret</b>, and paste in form bellow.</li>
+    <li>Send form</li>
+    <li>Access authorisation</li>
 </ol>
